@@ -77,19 +77,39 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "NOERA — Before It Fades" },
+      {
+        name: "description",
+        content:
+          "NOERA is a heirloom memory journal for photographs, reflections and meaningful moments. Preserve the moments that matter before they fade.",
+      },
+      { name: "author", content: "NOERA" },
+      { name: "keywords", content: "memory journal, keepsake journal, memory keeping, journaling, reflection journal, heirloom journal" },
+      { property: "og:title", content: "NOERA — Before It Fades" },
+      { property: "og:description", content: "A journal for photographs, reflections and memories that deserve to stay." },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:site_name", content: "NOERA" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=Italianno&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "NOERA",
+          slogan: "Before it fades",
+          description: "Heirloom memory journals for preserving photographs, reflections and meaningful moments.",
+        }),
       },
     ],
   }),
