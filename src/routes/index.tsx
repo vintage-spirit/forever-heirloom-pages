@@ -123,10 +123,12 @@ function Nav() {
           <a href="#contact" className="transition-opacity hover:opacity-70">Contact</a>
         </nav>
         <a
-          href="#journal"
+          href={STRIPE_URL}
+          target="_blank"
+          rel="noreferrer"
           className="hidden border border-cream/60 px-5 py-3 text-[0.65rem] uppercase tracking-[0.3em] text-cream transition hover:bg-cream hover:text-mocha md:inline-block"
         >
-          Shop
+          Shop the Journal
         </a>
       </div>
     </header>
