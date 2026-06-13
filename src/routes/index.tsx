@@ -449,9 +449,12 @@ function FromInstagram() {
           ))}
         </div>
         <Reveal delay={300}>
-          <div className="mt-16 text-center md:mt-20">
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-primary">
-              Follow Along
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-6 md:mt-20">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+              Shop the Journal
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-ghost">
+              Follow Along →
             </a>
           </div>
         </Reveal>
@@ -585,8 +588,8 @@ function FinalCTA() {
             <span className="block italic text-peach">will tell your story.</span>
           </h2>
           <div className="mt-14">
-            <a href="#journal" className="btn-primary bg-cream! text-mocha! border-cream!">
-              Start Your Journal
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
+              Shop the Journal
             </a>
           </div>
         </Reveal>
