@@ -52,7 +52,7 @@ function Logo({ className = "" }: { className?: string }) {
         <span>R</span>
         <span>A</span>
       </span>
-      <span className="mt-1 font-sans text-[0.6rem] font-medium italic tracking-[0.3em] uppercase opacity-70">
+      <span className="mt-2 font-serif text-sm italic leading-relaxed opacity-70">
         before it fades
       </span>
     </a>
