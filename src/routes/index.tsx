@@ -397,6 +397,11 @@ function InspirationArchive() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={300}>
+          <div className="mt-16 text-center md:mt-20">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
