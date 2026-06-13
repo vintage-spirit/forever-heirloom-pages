@@ -283,6 +283,11 @@ function GlimpseInside() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={300}>
+          <div className="mt-16 text-center md:mt-20">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -317,6 +322,9 @@ function Storytelling() {
             NOERA is built for the in-between moments — the ones that don't make it to
             the feed, but stay with you for years.
           </p>
+          <div className="mt-12">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+          </div>
         </div>
       </Reveal>
     </section>
