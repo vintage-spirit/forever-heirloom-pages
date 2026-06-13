@@ -119,7 +119,7 @@ function Nav() {
         <nav className="hidden items-center gap-10 text-[0.7rem] uppercase tracking-[0.3em] text-cream md:flex">
           <a href="#journal" className="transition-opacity hover:opacity-70">The Journal</a>
           <a href="#inside" className="transition-opacity hover:opacity-70">Inside</a>
-          <a href="#archive" className="transition-opacity hover:opacity-70">Archive</a>
+          <a href="#archive" className="transition-opacity hover:opacity-70">Inspiration</a>
           <a href="#contact" className="transition-opacity hover:opacity-70">Contact</a>
         </nav>
         <a
