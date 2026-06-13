@@ -106,6 +106,7 @@ function Index() {
       <Contact />
       <FinalCTA />
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }
