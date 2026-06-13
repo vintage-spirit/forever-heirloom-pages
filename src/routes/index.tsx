@@ -157,7 +157,7 @@ function Hero() {
             quietly bound, slowly written, made to outlast the scroll.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
-            <a href="#journal" className="btn-primary bg-cream! text-mocha! border-cream!">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
               Shop the Journal
             </a>
             <a href="#story" className="text-[0.72rem] uppercase tracking-[0.32em] text-cream/85 underline-offset-8 hover:underline">
