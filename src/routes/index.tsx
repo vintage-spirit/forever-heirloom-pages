@@ -615,3 +615,34 @@ function Footer() {
     </footer>
   );
 }
+
+function FloatingCTA() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    function onScroll() {
+      // Show once the user has scrolled past most of the hero (one viewport).
+      setVisible(window.scrollY > window.innerHeight * 0.85);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <a
+      href={STRIPE_URL}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Shop the Journal"
+      className="btn-plum fixed bottom-6 right-6 z-50 shadow-[0_18px_40px_-18px_rgba(71,45,48,0.55)] md:bottom-10 md:right-10"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        pointerEvents: visible ? "auto" : "none",
+        transition: "opacity 400ms ease, transform 400ms ease",
+      }}
+    >
+      Shop the Journal
+    </a>
+  );
+}
+
