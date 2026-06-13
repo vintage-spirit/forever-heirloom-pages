@@ -160,6 +160,27 @@
   }
 }
 
+@utility btn-plum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.05rem 2.2rem;
+  background: #723d46;
+  color: var(--cream);
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: 1px solid #723d46;
+  transition: all 400ms ease;
+  &:hover {
+    background: #5b303a;
+    border-color: #5b303a;
+  }
+}
+
 @utility btn-ghost {
   display: inline-flex;
   align-items: center;
