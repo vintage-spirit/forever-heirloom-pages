@@ -36,8 +36,7 @@ export const Route = createFileRoute("/")({
 });
 
 const INSTAGRAM_URL = "https://instagram.com/noera";
-// TODO: replace with your Formspree endpoint, e.g. https://formspree.io/f/abcdwxyz
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/your-id";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdavpbjd";
 
 function Logo({ className = "" }: { className?: string }) {
   return (
