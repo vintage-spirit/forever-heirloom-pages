@@ -140,10 +140,6 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-mocha/55 via-mocha/30 to-mocha/70" />
       <div className="relative mx-auto flex min-h-screen max-w-[1400px] flex-col justify-end px-6 pb-20 pt-40 md:px-12 md:pb-28 md:pt-44">
         <div className="max-w-3xl fade-in-slow">
-          <p className="eyebrow mb-8 text-cream/85">
-            <span className="rule mr-4 text-cream/70" />
-            Est. NOERA — Before it fades
-          </p>
           <h1 className="font-display text-[2.7rem] leading-[1.05] text-cream md:text-[5rem] lg:text-[6.25rem]">
             Keep the moments
             <span className="block italic text-peach">worth remembering.</span>
