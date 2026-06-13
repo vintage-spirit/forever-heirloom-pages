@@ -42,14 +42,19 @@ function Logo({ className = "" }: { className?: string }) {
   return (
     <a
       href="#top"
-      className={`inline-flex items-baseline gap-[0.18em] font-display text-[1.75rem] leading-none tracking-[0.42em] text-mocha ${className}`}
+      className={`inline-flex flex-col items-center font-display text-[1.75rem] leading-none tracking-[0.42em] text-mocha ${className}`}
       aria-label="NOERA — home"
     >
-      <span>N</span>
-      <span>O</span>
-      <span>E</span>
-      <span>R</span>
-      <span>A</span>
+      <span className="inline-flex items-baseline gap-[0.18em]">
+        <span>N</span>
+        <span>O</span>
+        <span>E</span>
+        <span>R</span>
+        <span>A</span>
+      </span>
+      <span className="mt-1 font-sans text-[0.6rem] font-medium italic tracking-[0.3em] uppercase opacity-70">
+        before it fades
+      </span>
     </a>
   );
 }
