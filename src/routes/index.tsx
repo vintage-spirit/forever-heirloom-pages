@@ -183,6 +183,11 @@ function EmotionalStatement() {
             Some moments deserve
             <span className="italic text-plum"> more than a camera roll.</span>
           </p>
+          <div className="mt-12">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+              Shop the Journal
+            </a>
+          </div>
         </div>
       </Reveal>
     </section>
@@ -230,7 +235,7 @@ function TheJournal() {
               </p>
             </div>
             <div className="mt-10">
-              <a href="#contact" className="btn-ghost">Discover the Journal →</a>
+              <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
             </div>
           </div>
         </Reveal>
