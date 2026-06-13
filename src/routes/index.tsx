@@ -37,6 +37,7 @@ export const Route = createFileRoute("/")({
 
 const INSTAGRAM_URL = "https://instagram.com/noera";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdavpbjd";
+const STRIPE_URL = "https://buy.stripe.com/5kQeV68Q3eD9eTL7zK7kc00";
 
 function Logo({ className = "" }: { className?: string }) {
   return (
