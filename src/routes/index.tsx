@@ -37,6 +37,7 @@ export const Route = createFileRoute("/")({
 
 const INSTAGRAM_URL = "https://instagram.com/noera";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdavpbjd";
+const STRIPE_URL = "https://buy.stripe.com/5kQeV68Q3eD9eTL7zK7kc00";
 
 function Logo({ className = "" }: { className?: string }) {
   return (
@@ -105,6 +106,7 @@ function Index() {
       <Contact />
       <FinalCTA />
       <Footer />
+      <FloatingCTA />
     </div>
   );
 }
@@ -121,10 +123,12 @@ function Nav() {
           <a href="#contact" className="transition-opacity hover:opacity-70">Contact</a>
         </nav>
         <a
-          href="#journal"
+          href={STRIPE_URL}
+          target="_blank"
+          rel="noreferrer"
           className="hidden border border-cream/60 px-5 py-3 text-[0.65rem] uppercase tracking-[0.3em] text-cream transition hover:bg-cream hover:text-mocha md:inline-block"
         >
-          Shop
+          Shop the Journal
         </a>
       </div>
     </header>
@@ -153,7 +157,7 @@ function Hero() {
             quietly bound, slowly written, made to outlast the scroll.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
-            <a href="#journal" className="btn-primary bg-cream! text-mocha! border-cream!">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
               Shop the Journal
             </a>
             <a href="#story" className="text-[0.72rem] uppercase tracking-[0.32em] text-cream/85 underline-offset-8 hover:underline">
@@ -179,6 +183,11 @@ function EmotionalStatement() {
             Some moments deserve
             <span className="italic text-plum"> more than a camera roll.</span>
           </p>
+          <div className="mt-12">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+              Shop the Journal
+            </a>
+          </div>
         </div>
       </Reveal>
     </section>
@@ -226,7 +235,7 @@ function TheJournal() {
               </p>
             </div>
             <div className="mt-10">
-              <a href="#contact" className="btn-ghost">Discover the Journal →</a>
+              <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
             </div>
           </div>
         </Reveal>
@@ -274,6 +283,11 @@ function GlimpseInside() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={300}>
+          <div className="mt-16 text-center md:mt-20">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -308,6 +322,9 @@ function Storytelling() {
             NOERA is built for the in-between moments — the ones that don't make it to
             the feed, but stay with you for years.
           </p>
+          <div className="mt-12">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+          </div>
         </div>
       </Reveal>
     </section>
@@ -380,6 +397,11 @@ function InspirationArchive() {
             </Reveal>
           ))}
         </div>
+        <Reveal delay={300}>
+          <div className="mt-16 text-center md:mt-20">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -427,9 +449,12 @@ function FromInstagram() {
           ))}
         </div>
         <Reveal delay={300}>
-          <div className="mt-16 text-center md:mt-20">
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-primary">
-              Follow Along
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-6 md:mt-20">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+              Shop the Journal
+            </a>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-ghost">
+              Follow Along →
             </a>
           </div>
         </Reveal>
@@ -563,8 +588,8 @@ function FinalCTA() {
             <span className="block italic text-peach">will tell your story.</span>
           </h2>
           <div className="mt-14">
-            <a href="#journal" className="btn-primary bg-cream! text-mocha! border-cream!">
-              Start Your Journal
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
+              Shop the Journal
             </a>
           </div>
         </Reveal>
@@ -590,3 +615,34 @@ function Footer() {
     </footer>
   );
 }
+
+function FloatingCTA() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    function onScroll() {
+      // Show once the user has scrolled past most of the hero (one viewport).
+      setVisible(window.scrollY > window.innerHeight * 0.85);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return (
+    <a
+      href={STRIPE_URL}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Shop the Journal"
+      className="btn-plum fixed bottom-6 right-6 z-50 shadow-[0_18px_40px_-18px_rgba(71,45,48,0.55)] md:bottom-10 md:right-10"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(16px)",
+        pointerEvents: visible ? "auto" : "none",
+        transition: "opacity 400ms ease, transform 400ms ease",
+      }}
+    >
+      Shop the Journal
+    </a>
+  );
+}
+
