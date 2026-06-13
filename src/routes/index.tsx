@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const INSTAGRAM_URL = "https://instagram.com/noera";
+const INSTAGRAM_URL = "https://www.instagram.com/noera_beforeitfades/?utm_source=ig_web_button_share_sheet";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdavpbjd";
 const STRIPE_URL = "https://buy.stripe.com/5kQeV68Q3eD9eTL7zK7kc00";
 
