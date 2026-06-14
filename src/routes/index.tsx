@@ -245,47 +245,283 @@ function TheJournal() {
 }
 
 function GlimpseInside() {
-  const items = [
-    { src: inside1, alt: "Open journal page with vintage polaroid photographs taped down and handwritten notes", caption: "Photographs, kept." },
-    { src: inside2, alt: "Close up of fountain pen on handwritten cursive journal page", caption: "Thoughts, in ink." },
-    { src: inside3, alt: "Vintage train ticket, postcard and pressed leaves on journal paper", caption: "Keepsakes, archived." },
+  const cards = [
+    {
+      icon: "📸",
+      title: "Moments",
+      copy: "For the photographs that deserve more than a camera roll.",
+    },
+    {
+      icon: "🖋",
+      title: "Thoughts",
+      copy: "For the words that explain what the photograph cannot.",
+    },
+    {
+      icon: "🌿",
+      title: "Legacy",
+      copy: "For the people who may one day want to know who you were.",
+    },
   ];
+
+  const watermarks = [
+    { text: "this mattered", top: "12%", left: "6%", rotate: "-8deg" },
+    { text: "what stayed?", top: "62%", left: "18%", rotate: "-4deg" },
+    { text: "keep this", top: "30%", left: "70%", rotate: "6deg" },
+    { text: "before it fades", top: "78%", left: "58%", rotate: "-3deg" },
+    { text: "this mattered", top: "44%", left: "44%", rotate: "2deg" },
+  ];
+
   return (
     <section id="inside" className="bg-background py-24 md:py-40">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
         <Reveal>
-          <div className="mb-20 max-w-2xl md:mb-28">
+          <div className="mb-16 max-w-2xl md:mb-24">
             <p className="eyebrow mb-5 text-plum">
               <span className="rule mr-4" />
-              A glimpse inside
+              The journal, opened
             </p>
             <h2 className="font-display text-4xl leading-[1.1] text-mocha md:text-6xl">
-              Pages that remember <span className="italic">the small things.</span>
+              Inside <span className="italic">a Memory.</span>
             </h2>
+            <p className="mt-6 max-w-xl font-display text-xl italic leading-relaxed text-mocha/75 md:text-2xl">
+              Every page is designed to help you preserve a moment before it fades.
+            </p>
           </div>
         </Reveal>
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-10">
-          {items.map((it, i) => (
-            <Reveal key={it.caption} delay={i * 180}>
-              <figure className="space-y-5">
-                <div className="overflow-hidden">
-                  <img
-                    src={it.src}
-                    alt={it.alt}
-                    width={1024}
-                    height={1280}
-                    loading="lazy"
-                    className="aspect-[4/5] w-full object-cover transition-transform duration-[1200ms] ease-out hover:scale-[1.03]"
-                  />
+
+        {/* Journal spread */}
+        <Reveal delay={120}>
+          <div className="relative mx-auto w-full max-w-[1100px]">
+            {/* Book shadow */}
+            <div
+              aria-hidden
+              className="absolute -inset-x-4 -bottom-6 -top-4 -z-10 rounded-[2px]"
+              style={{
+                background: "radial-gradient(ellipse at center, rgba(71,45,48,0.28), transparent 70%)",
+                filter: "blur(24px)",
+              }}
+            />
+            <div
+              className="relative grid grid-cols-1 overflow-hidden rounded-[3px] md:grid-cols-2"
+              style={{
+                background:
+                  "linear-gradient(180deg, #f6ecd8 0%, #f1e4ca 55%, #ead7b6 100%)",
+                boxShadow:
+                  "0 30px 60px -25px rgba(71,45,48,0.45), inset 0 0 80px rgba(114,61,70,0.08)",
+              }}
+            >
+              {/* Aged paper grain */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-multiply"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(circle at 20% 15%, rgba(114,61,70,0.12), transparent 45%), radial-gradient(circle at 80% 85%, rgba(71,45,48,0.14), transparent 50%), radial-gradient(circle at 60% 30%, rgba(226,109,92,0.06), transparent 40%)",
+                }}
+              />
+              {/* Center binding */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 md:block"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent, rgba(71,45,48,0.35) 12%, rgba(71,45,48,0.45) 50%, rgba(71,45,48,0.35) 88%, transparent)",
+                  boxShadow: "0 0 18px rgba(71,45,48,0.18)",
+                }}
+              />
+
+              {/* Watermarks */}
+              {watermarks.map((w, i) => (
+                <span
+                  key={i}
+                  aria-hidden
+                  className="pointer-events-none absolute font-display italic text-mocha select-none"
+                  style={{
+                    top: w.top,
+                    left: w.left,
+                    transform: `rotate(${w.rotate})`,
+                    fontSize: "clamp(1.1rem, 2.2vw, 1.8rem)",
+                    opacity: 0.07,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {w.text}
+                </span>
+              ))}
+
+              {/* LEFT PAGE — Date + Photograph */}
+              <div className="relative p-8 md:p-12">
+                {/* Date & Time */}
+                <div className="mb-8 flex items-end justify-between border-b border-mocha/20 pb-4">
+                  <div>
+                    <p className="eyebrow text-[0.6rem] text-plum/80">Date</p>
+                    <p className="mt-1 font-display text-xl italic text-mocha md:text-2xl">
+                      14<span className="not-italic"> · </span>June<span className="not-italic"> · </span>2026
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="eyebrow text-[0.6rem] text-plum/80">Time</p>
+                    <p className="mt-1 font-display text-xl italic text-mocha md:text-2xl">half past four</p>
+                  </div>
                 </div>
-                <figcaption className="font-display text-xl italic text-plum">— {it.caption}</figcaption>
-              </figure>
+
+                {/* Photograph with vintage corners */}
+                <div className="relative mx-auto aspect-[4/5] w-full max-w-[360px]">
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: "#fdfaf3",
+                      padding: "10px 10px 56px 10px",
+                      boxShadow:
+                        "0 18px 30px -18px rgba(71,45,48,0.55), 0 2px 0 rgba(71,45,48,0.06)",
+                      transform: "rotate(-1.2deg)",
+                    }}
+                  >
+                    <img
+                      src={inside1}
+                      alt="A printed photograph held in vintage corners on a journal page"
+                      className="h-[calc(100%-46px)] w-full object-cover"
+                      loading="lazy"
+                    />
+                    <p className="mt-3 text-center font-display italic text-mocha/70" style={{ fontSize: "0.95rem" }}>
+                      the afternoon light, before it left.
+                    </p>
+                  </div>
+                  {/* Photo corners */}
+                  {[
+                    { top: -6, left: -6, rot: -45 },
+                    { top: -6, right: -6, rot: 45 },
+                    { bottom: -6, left: -6, rot: -135 },
+                    { bottom: -6, right: -6, rot: 135 },
+                  ].map((c, i) => (
+                    <span
+                      key={i}
+                      aria-hidden
+                      className="absolute block"
+                      style={{
+                        width: 28,
+                        height: 28,
+                        top: c.top,
+                        left: c.left,
+                        right: c.right,
+                        bottom: c.bottom,
+                        background:
+                          "linear-gradient(135deg, #6b4a2b 0%, #4a3220 60%, #3a2618 100%)",
+                        clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                        transform: `rotate(${c.rot}deg)`,
+                        opacity: 0.85,
+                        boxShadow: "0 1px 2px rgba(0,0,0,0.25)",
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* RIGHT PAGE — Reflection + Memory Mark */}
+              <div className="relative border-t border-mocha/15 p-8 md:border-l md:border-t-0 md:p-12">
+                <p className="eyebrow mb-6 text-[0.6rem] text-plum/80">Reflection</p>
+
+                {/* Handwriting lines */}
+                <div className="relative space-y-[1.6rem]">
+                  {[
+                    "We walked the long way home today.",
+                    "You stopped to point at the figs —",
+                    "the ones that always ripen too early.",
+                    "I wanted to remember your face then.",
+                    "Not the photograph. The looking.",
+                    "",
+                    "Some afternoons just stay.",
+                  ].map((line, i) => (
+                    <div
+                      key={i}
+                      className="relative font-display italic text-mocha"
+                      style={{
+                        fontSize: "1.15rem",
+                        lineHeight: 1,
+                        borderBottom: "1px solid rgba(71,45,48,0.18)",
+                        paddingBottom: "0.55rem",
+                      }}
+                    >
+                      {line || "\u00A0"}
+                    </div>
+                  ))}
+                </div>
+
+                {/* Memory Mark */}
+                <div className="mt-10 flex items-end justify-between">
+                  <div>
+                    <p className="eyebrow text-[0.6rem] text-plum/80">Memory Mark</p>
+                    <div className="mt-3 flex items-center gap-4">
+                      {[
+                        { c: "#8a6a3b", label: "Remember" },
+                        { c: "#b97a86", label: "Feel" },
+                        { c: "#6f8aa3", label: "Reflect" },
+                      ].map((s) => (
+                        <div key={s.label} className="flex flex-col items-center gap-1.5">
+                          <span
+                            aria-hidden
+                            className="block h-5 w-5 rounded-full"
+                            style={{
+                              background: s.c,
+                              boxShadow: `inset 0 0 4px rgba(0,0,0,0.25), 0 0 0 1px ${s.c}55`,
+                              opacity: 0.85,
+                            }}
+                          />
+                          <span className="font-display text-[0.7rem] italic text-mocha/70">{s.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Envelope stamp */}
+                  <div
+                    className="relative flex h-20 w-20 items-center justify-center rounded-full"
+                    style={{
+                      border: "1.5px solid #723d46",
+                      color: "#723d46",
+                      transform: "rotate(-8deg)",
+                      opacity: 0.85,
+                    }}
+                  >
+                    <div className="text-center leading-tight">
+                      <p className="font-display text-[1.4rem] italic">N</p>
+                      <p className="eyebrow text-[0.5rem]">Noera</p>
+                    </div>
+                    <span
+                      aria-hidden
+                      className="absolute -right-2 -top-2 h-4 w-4 rounded-full"
+                      style={{ background: "#b97a86", opacity: 0.75, filter: "blur(0.3px)" }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Three cards */}
+        <div className="mt-20 grid grid-cols-1 gap-6 md:mt-28 md:grid-cols-3 md:gap-8">
+          {cards.map((c, i) => (
+            <Reveal key={c.title} delay={i * 140}>
+              <div
+                className="h-full border border-mocha/15 bg-paper p-8 md:p-10"
+                style={{ boxShadow: "0 10px 30px -20px rgba(71,45,48,0.35)" }}
+              >
+                <p className="text-3xl">{c.icon}</p>
+                <h3 className="mt-5 font-display text-2xl italic text-plum md:text-3xl">{c.title}</h3>
+                <p className="mt-4 font-display text-lg leading-relaxed text-mocha/80 md:text-xl">
+                  {c.copy}
+                </p>
+              </div>
             </Reveal>
           ))}
         </div>
+
         <Reveal delay={300}>
           <div className="mt-16 text-center md:mt-20">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+              Shop the Journal
+            </a>
           </div>
         </Reveal>
       </div>
