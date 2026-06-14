@@ -245,93 +245,131 @@ function TheJournal() {
 }
 
 function GlimpseInside() {
-  const cards = [
-    {
-      icon: "📸",
-      title: "Moments",
-      copy: "For the photographs that deserve more than a camera roll.",
-    },
-    {
-      icon: "🖋",
-      title: "Thoughts",
-      copy: "For the words that explain what the photograph cannot.",
-    },
-    {
-      icon: "🌿",
-      title: "Legacy",
-      copy: "For the people who may one day want to know who you were.",
-    },
-  ];
-
-  const watermarks = [
-    { text: "this mattered", top: "12%", left: "6%", rotate: "-8deg" },
-    { text: "what stayed?", top: "62%", left: "18%", rotate: "-4deg" },
-    { text: "keep this", top: "30%", left: "70%", rotate: "6deg" },
-    { text: "before it fades", top: "78%", left: "58%", rotate: "-3deg" },
-    { text: "this mattered", top: "44%", left: "44%", rotate: "2deg" },
+  // Faint handwritten whispers drifting across the paper — felt, not labelled.
+  const whispers = [
+    { text: "what stayed?", top: "8%", left: "4%", rotate: "-7deg", size: "1.6rem", opacity: 0.06 },
+    { text: "before it fades", top: "78%", left: "10%", rotate: "-3deg", size: "1.4rem", opacity: 0.05 },
+    { text: "this mattered", top: "6%", left: "72%", rotate: "5deg", size: "1.5rem", opacity: 0.05 },
+    { text: "keep this", top: "86%", left: "70%", rotate: "-2deg", size: "1.3rem", opacity: 0.06 },
   ];
 
   return (
-    <section id="inside" className="bg-background py-24 md:py-40">
-      <div className="mx-auto max-w-[1400px] px-6 md:px-12">
+    <section id="inside" className="relative overflow-hidden bg-background py-28 md:py-44">
+      {/* Soft cinematic vignette */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(71,45,48,0.10) 100%)",
+        }}
+      />
+
+      <div className="relative mx-auto max-w-[1200px] px-6 md:px-12">
+        {/* Quiet, almost private opening */}
         <Reveal>
-          <div className="mb-16 max-w-2xl md:mb-24">
-            <p className="eyebrow mb-5 text-plum">
-              <span className="rule mr-4" />
-              The journal, opened
+          <div className="mx-auto mb-20 max-w-2xl text-center md:mb-28">
+            <p className="eyebrow mb-6 text-plum/70">
+              <span className="rule mr-4" /> found, years later <span className="rule ml-4" />
             </p>
-            <h2 className="font-display text-4xl leading-[1.1] text-mocha md:text-6xl">
-              Inside <span className="italic">a Memory.</span>
+            <h2 className="font-display text-4xl leading-[1.15] text-mocha md:text-6xl">
+              One day,{" "}
+              <span className="italic">someone will open this</span>
+              <br className="hidden md:block" />
+              and meet you.
             </h2>
-            <p className="mt-6 max-w-xl font-display text-xl italic leading-relaxed text-mocha/75 md:text-2xl">
-              Every page is designed to help you preserve a moment before it fades.
+            <p className="mt-8 font-display text-xl italic leading-relaxed text-mocha/70 md:text-2xl">
+              Not the version of you online.
+              <br />
+              The one only paper remembers.
             </p>
           </div>
         </Reveal>
 
-        {/* Journal spread */}
-        <Reveal delay={120}>
-          <div className="relative mx-auto w-full max-w-[1100px]">
-            {/* Book shadow */}
+        {/* The open journal — cinematic, used, personal */}
+        <Reveal delay={140}>
+          <div className="relative mx-auto w-full max-w-[1080px]">
+            {/* Deep beneath-book shadow */}
             <div
               aria-hidden
-              className="absolute -inset-x-4 -bottom-6 -top-4 -z-10 rounded-[2px]"
-              style={{
-                background: "radial-gradient(ellipse at center, rgba(71,45,48,0.28), transparent 70%)",
-                filter: "blur(24px)",
-              }}
-            />
-            <div
-              className="relative grid grid-cols-1 overflow-hidden rounded-[3px] md:grid-cols-2"
+              className="absolute -inset-x-8 -bottom-10 top-8 -z-10"
               style={{
                 background:
-                  "linear-gradient(180deg, #f6ecd8 0%, #f1e4ca 55%, #ead7b6 100%)",
+                  "radial-gradient(ellipse at center, rgba(71,45,48,0.35), transparent 70%)",
+                filter: "blur(36px)",
+              }}
+            />
+
+            {/* The spread */}
+            <div
+              className="relative overflow-hidden"
+              style={{
+                background:
+                  "linear-gradient(178deg, #f4e8cf 0%, #efdfbf 40%, #e8d3aa 75%, #ddc294 100%)",
                 boxShadow:
-                  "0 30px 60px -25px rgba(71,45,48,0.45), inset 0 0 80px rgba(114,61,70,0.08)",
+                  "0 40px 80px -30px rgba(71,45,48,0.55), inset 0 0 120px rgba(114,61,70,0.10), inset 0 0 0 1px rgba(71,45,48,0.08)",
+                borderRadius: "2px",
+                transform: "rotate(-0.4deg)",
               }}
             >
-              {/* Aged paper grain */}
+              {/* Aged paper grain + stains */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 opacity-[0.35] mix-blend-multiply"
+                className="pointer-events-none absolute inset-0 mix-blend-multiply"
                 style={{
+                  opacity: 0.55,
                   backgroundImage:
-                    "radial-gradient(circle at 20% 15%, rgba(114,61,70,0.12), transparent 45%), radial-gradient(circle at 80% 85%, rgba(71,45,48,0.14), transparent 50%), radial-gradient(circle at 60% 30%, rgba(226,109,92,0.06), transparent 40%)",
+                    "radial-gradient(circle at 18% 22%, rgba(120,80,40,0.18), transparent 35%), radial-gradient(circle at 82% 78%, rgba(71,45,48,0.20), transparent 40%), radial-gradient(circle at 55% 12%, rgba(180,120,70,0.10), transparent 25%), radial-gradient(circle at 30% 88%, rgba(226,109,92,0.08), transparent 30%), radial-gradient(circle at 90% 35%, rgba(120,80,40,0.12), transparent 30%)",
                 }}
               />
-              {/* Center binding */}
+              {/* Fine paper fibre noise */}
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 md:block"
+                className="pointer-events-none absolute inset-0 mix-blend-overlay"
                 style={{
-                  background:
-                    "linear-gradient(180deg, transparent, rgba(71,45,48,0.35) 12%, rgba(71,45,48,0.45) 50%, rgba(71,45,48,0.35) 88%, transparent)",
-                  boxShadow: "0 0 18px rgba(71,45,48,0.18)",
+                  opacity: 0.35,
+                  backgroundImage:
+                    "repeating-linear-gradient(92deg, rgba(71,45,48,0.05) 0 1px, transparent 1px 3px), repeating-linear-gradient(2deg, rgba(71,45,48,0.04) 0 1px, transparent 1px 4px)",
                 }}
               />
 
-              {/* Watermarks */}
-              {watermarks.map((w, i) => (
+              {/* Foxing — age spots */}
+              {[
+                { top: "14%", left: "8%", size: 14, o: 0.18 },
+                { top: "72%", left: "22%", size: 9, o: 0.22 },
+                { top: "30%", left: "88%", size: 11, o: 0.16 },
+                { top: "84%", left: "78%", size: 7, o: 0.20 },
+              ].map((s, i) => (
+                <span
+                  key={i}
+                  aria-hidden
+                  className="pointer-events-none absolute rounded-full"
+                  style={{
+                    top: s.top,
+                    left: s.left,
+                    width: s.size,
+                    height: s.size,
+                    background: "rgba(120,70,40,0.55)",
+                    opacity: s.o,
+                    filter: "blur(2px)",
+                  }}
+                />
+              ))}
+
+              {/* Center binding crease */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-[2px] -translate-x-1/2 md:block"
+                style={{
+                  background:
+                    "linear-gradient(180deg, transparent, rgba(71,45,48,0.18) 8%, rgba(71,45,48,0.32) 50%, rgba(71,45,48,0.18) 92%, transparent)",
+                  boxShadow:
+                    "-8px 0 18px -8px rgba(71,45,48,0.30), 8px 0 18px -8px rgba(71,45,48,0.30)",
+                }}
+              />
+
+              {/* Drifting whispers */}
+              {whispers.map((w, i) => (
                 <span
                   key={i}
                   aria-hidden
@@ -340,188 +378,215 @@ function GlimpseInside() {
                     top: w.top,
                     left: w.left,
                     transform: `rotate(${w.rotate})`,
-                    fontSize: "clamp(1.1rem, 2.2vw, 1.8rem)",
-                    opacity: 0.07,
-                    letterSpacing: "0.02em",
+                    fontSize: w.size,
+                    opacity: w.opacity,
+                    letterSpacing: "0.01em",
                   }}
                 >
                   {w.text}
                 </span>
               ))}
 
-              {/* LEFT PAGE — Date + Photograph */}
-              <div className="relative p-8 md:p-12">
-                {/* Date & Time */}
-                <div className="mb-8 flex items-end justify-between border-b border-mocha/20 pb-4">
-                  <div>
-                    <p className="eyebrow text-[0.6rem] text-plum/80">Date</p>
-                    <p className="mt-1 font-display text-xl italic text-mocha md:text-2xl">
-                      14<span className="not-italic"> · </span>June<span className="not-italic"> · </span>2026
-                    </p>
-                  </div>
-                  <div className="text-right">
-                    <p className="eyebrow text-[0.6rem] text-plum/80">Time</p>
-                    <p className="mt-1 font-display text-xl italic text-mocha md:text-2xl">half past four</p>
-                  </div>
-                </div>
-
-                {/* Photograph with vintage corners */}
-                <div className="relative mx-auto aspect-[4/5] w-full max-w-[360px]">
+              <div className="relative grid grid-cols-1 md:grid-cols-[1.05fr_1fr]">
+                {/* LEFT PAGE — photograph held with vintage corners */}
+                <div className="relative px-8 pt-12 pb-10 md:px-14 md:pt-20 md:pb-16">
                   <div
-                    className="absolute inset-0"
-                    style={{
-                      background: "#fdfaf3",
-                      padding: "10px 10px 56px 10px",
-                      boxShadow:
-                        "0 18px 30px -18px rgba(71,45,48,0.55), 0 2px 0 rgba(71,45,48,0.06)",
-                      transform: "rotate(-1.2deg)",
-                    }}
+                    className="relative mx-auto"
+                    style={{ width: "min(100%, 380px)", transform: "rotate(-2.2deg)" }}
                   >
-                    <img
-                      src={inside1}
-                      alt="A printed photograph held in vintage corners on a journal page"
-                      className="h-[calc(100%-46px)] w-full object-cover"
-                      loading="lazy"
-                    />
-                    <p className="mt-3 text-center font-display italic text-mocha/70" style={{ fontSize: "0.95rem" }}>
-                      the afternoon light, before it left.
-                    </p>
-                  </div>
-                  {/* Photo corners */}
-                  {[
-                    { top: -6, left: -6, rot: -45 },
-                    { top: -6, right: -6, rot: 45 },
-                    { bottom: -6, left: -6, rot: -135 },
-                    { bottom: -6, right: -6, rot: 135 },
-                  ].map((c, i) => (
-                    <span
-                      key={i}
-                      aria-hidden
-                      className="absolute block"
-                      style={{
-                        width: 28,
-                        height: 28,
-                        top: c.top,
-                        left: c.left,
-                        right: c.right,
-                        bottom: c.bottom,
-                        background:
-                          "linear-gradient(135deg, #6b4a2b 0%, #4a3220 60%, #3a2618 100%)",
-                        clipPath: "polygon(0 0, 100% 0, 0 100%)",
-                        transform: `rotate(${c.rot}deg)`,
-                        opacity: 0.85,
-                        boxShadow: "0 1px 2px rgba(0,0,0,0.25)",
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* RIGHT PAGE — Reflection + Memory Mark */}
-              <div className="relative border-t border-mocha/15 p-8 md:border-l md:border-t-0 md:p-12">
-                <p className="eyebrow mb-6 text-[0.6rem] text-plum/80">Reflection</p>
-
-                {/* Handwriting lines */}
-                <div className="relative space-y-[1.6rem]">
-                  {[
-                    "We walked the long way home today.",
-                    "You stopped to point at the figs —",
-                    "the ones that always ripen too early.",
-                    "I wanted to remember your face then.",
-                    "Not the photograph. The looking.",
-                    "",
-                    "Some afternoons just stay.",
-                  ].map((line, i) => (
+                    {/* The print */}
                     <div
-                      key={i}
-                      className="relative font-display italic text-mocha"
+                      className="relative"
                       style={{
-                        fontSize: "1.15rem",
-                        lineHeight: 1,
-                        borderBottom: "1px solid rgba(71,45,48,0.18)",
-                        paddingBottom: "0.55rem",
+                        background: "#fbf4e4",
+                        padding: "12px 12px 14px 12px",
+                        boxShadow:
+                          "0 22px 38px -22px rgba(71,45,48,0.65), 0 2px 0 rgba(71,45,48,0.08), inset 0 0 0 1px rgba(71,45,48,0.06)",
                       }}
                     >
-                      {line || "\u00A0"}
+                      <div className="relative aspect-[4/5] w-full overflow-hidden">
+                        <img
+                          src={inside1}
+                          alt="A printed photograph tucked into the journal with vintage paper corners"
+                          className="h-full w-full object-cover"
+                          style={{ filter: "sepia(0.18) contrast(0.95) saturate(0.9)" }}
+                          loading="lazy"
+                        />
+                        {/* Photo aging overlay */}
+                        <div
+                          aria-hidden
+                          className="pointer-events-none absolute inset-0"
+                          style={{
+                            background:
+                              "radial-gradient(ellipse at center, transparent 55%, rgba(71,45,48,0.28) 100%)",
+                          }}
+                        />
+                      </div>
                     </div>
-                  ))}
+
+                    {/* Vintage photo corners — only two, the others fallen away */}
+                    {[
+                      { top: -8, left: -8, rot: 0 },
+                      { bottom: -8, right: -8, rot: 180 },
+                      { top: -8, right: -8, rot: 90 },
+                    ].map((c, i) => (
+                      <span
+                        key={i}
+                        aria-hidden
+                        className="absolute block"
+                        style={{
+                          width: 30,
+                          height: 30,
+                          top: c.top,
+                          left: c.left,
+                          right: c.right,
+                          bottom: c.bottom,
+                          background:
+                            "linear-gradient(135deg, #5a3a1f 0%, #3d2614 70%, #2a1a0d 100%)",
+                          clipPath: "polygon(0 0, 100% 0, 0 100%)",
+                          transform: `rotate(${c.rot}deg)`,
+                          opacity: 0.78,
+                          boxShadow: "0 2px 3px rgba(0,0,0,0.30)",
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Handwritten caption beneath the photograph */}
+                  <p
+                    className="mx-auto mt-10 max-w-[320px] text-center font-display italic text-mocha/80"
+                    style={{ fontSize: "1.15rem", transform: "rotate(-1deg)" }}
+                  >
+                    the afternoon light,
+                    <br />
+                    before it left.
+                  </p>
                 </div>
 
-                {/* Memory Mark */}
-                <div className="mt-10 flex items-end justify-between">
-                  <div>
-                    <p className="eyebrow text-[0.6rem] text-plum/80">Memory Mark</p>
-                    <div className="mt-3 flex items-center gap-4">
-                      {[
-                        { c: "#8a6a3b", label: "Remember" },
-                        { c: "#b97a86", label: "Feel" },
-                        { c: "#6f8aa3", label: "Reflect" },
-                      ].map((s) => (
-                        <div key={s.label} className="flex flex-col items-center gap-1.5">
-                          <span
-                            aria-hidden
-                            className="block h-5 w-5 rounded-full"
-                            style={{
-                              background: s.c,
-                              boxShadow: `inset 0 0 4px rgba(0,0,0,0.25), 0 0 0 1px ${s.c}55`,
-                              opacity: 0.85,
-                            }}
-                          />
-                          <span className="font-display text-[0.7rem] italic text-mocha/70">{s.label}</span>
-                        </div>
-                      ))}
+                {/* RIGHT PAGE — date and handwritten thoughts, no labels */}
+                <div className="relative px-8 pt-10 pb-14 md:px-14 md:pt-20 md:pb-20">
+                  {/* Handwritten date */}
+                  <p
+                    className="font-display italic text-mocha/85"
+                    style={{ fontSize: "1.25rem", transform: "rotate(-0.8deg)" }}
+                  >
+                    Sunday — 14 June, half past four
+                  </p>
+
+                  {/* The thoughts */}
+                  <div
+                    className="mt-8 space-y-6 font-display italic text-mocha"
+                    style={{ fontSize: "1.25rem", lineHeight: 1.6 }}
+                  >
+                    <p style={{ transform: "rotate(-0.3deg)" }}>
+                      We walked the long way home today.
+                    </p>
+                    <p style={{ transform: "rotate(0.2deg)" }}>
+                      You stopped to point at the figs —
+                      <br />
+                      the ones that always ripen too early.
+                    </p>
+                    <p style={{ transform: "rotate(-0.2deg)" }}>
+                      I wanted to remember your face then.
+                      <br />
+                      Not the photograph.{" "}
+                      <span className="text-plum/90">The looking.</span>
+                    </p>
+                    <p
+                      className="pt-4 text-mocha/70"
+                      style={{ fontSize: "1.1rem", transform: "rotate(0.4deg)" }}
+                    >
+                      Some afternoons just stay.
+                    </p>
+                  </div>
+
+                  {/* Subtle stamp — quiet, not a logo wall */}
+                  <div
+                    aria-hidden
+                    className="absolute bottom-8 right-8 md:bottom-12 md:right-14"
+                    style={{ transform: "rotate(-12deg)", opacity: 0.42 }}
+                  >
+                    <div
+                      className="flex h-16 w-16 items-center justify-center rounded-full"
+                      style={{
+                        border: "1.2px solid #723d46",
+                        color: "#723d46",
+                        boxShadow: "inset 0 0 8px rgba(114,61,70,0.25)",
+                      }}
+                    >
+                      <div className="text-center leading-tight">
+                        <p className="font-display text-[1.1rem] italic">N</p>
+                        <p
+                          className="font-sans uppercase"
+                          style={{ fontSize: "0.42rem", letterSpacing: "0.28em" }}
+                        >
+                          Noera
+                        </p>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Envelope stamp */}
-                  <div
-                    className="relative flex h-20 w-20 items-center justify-center rounded-full"
+                  {/* A small dried pressed-flower mark — tactile detail */}
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute"
                     style={{
-                      border: "1.5px solid #723d46",
-                      color: "#723d46",
-                      transform: "rotate(-8deg)",
-                      opacity: 0.85,
+                      top: "6%",
+                      right: "10%",
+                      width: 10,
+                      height: 10,
+                      background: "#8a6a3b",
+                      borderRadius: "50%",
+                      opacity: 0.35,
+                      boxShadow:
+                        "0 0 0 3px rgba(138,106,59,0.10), 0 0 8px rgba(138,106,59,0.20)",
                     }}
-                  >
-                    <div className="text-center leading-tight">
-                      <p className="font-display text-[1.4rem] italic">N</p>
-                      <p className="eyebrow text-[0.5rem]">Noera</p>
-                    </div>
-                    <span
-                      aria-hidden
-                      className="absolute -right-2 -top-2 h-4 w-4 rounded-full"
-                      style={{ background: "#b97a86", opacity: 0.75, filter: "blur(0.3px)" }}
-                    />
-                  </div>
+                  />
                 </div>
               </div>
             </div>
+
+            {/* Quiet caption beneath the spread */}
+            <p className="mt-10 text-center font-display italic text-mocha/55 md:mt-14" style={{ fontSize: "1.05rem" }}>
+              A page someone wrote on a Sunday they almost forgot.
+            </p>
           </div>
         </Reveal>
 
-        {/* Three cards */}
-        <div className="mt-20 grid grid-cols-1 gap-6 md:mt-28 md:grid-cols-3 md:gap-8">
-          {cards.map((c, i) => (
-            <Reveal key={c.title} delay={i * 140}>
-              <div
-                className="h-full border border-mocha/15 bg-paper p-8 md:p-10"
-                style={{ boxShadow: "0 10px 30px -20px rgba(71,45,48,0.35)" }}
-              >
-                <p className="text-3xl">{c.icon}</p>
-                <h3 className="mt-5 font-display text-2xl italic text-plum md:text-3xl">{c.title}</h3>
-                <p className="mt-4 font-display text-lg leading-relaxed text-mocha/80 md:text-xl">
-                  {c.copy}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        {/* Three emotional thoughts — flowing prose, not cards */}
+        <Reveal delay={220}>
+          <div className="mx-auto mt-28 max-w-3xl space-y-14 text-center md:mt-36 md:space-y-20">
+            <p className="font-display text-2xl leading-[1.55] text-mocha md:text-3xl">
+              A home for the photographs that{" "}
+              <span className="italic text-plum">never made it into an album</span> —
+              the ones still asleep in a camera roll, waiting to mean something again.
+            </p>
+
+            <p className="font-display text-2xl leading-[1.55] text-mocha md:text-3xl">
+              A photograph remembers <span className="italic">what happened.</span>
+              <br />
+              Words remember <span className="italic text-plum">what it felt like.</span>
+              <br />
+              NOERA is where the two meet.
+            </p>
+
+            <p className="font-display text-2xl leading-[1.55] text-mocha md:text-3xl">
+              One day, your children — or your future self —
+              <br />
+              may want to know who you were{" "}
+              <span className="italic text-plum">on an ordinary Sunday.</span>
+            </p>
+          </div>
+        </Reveal>
 
         <Reveal delay={300}>
-          <div className="mt-16 text-center md:mt-20">
+          <div className="mt-20 text-center md:mt-28">
             <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
               Shop the Journal
             </a>
+            <p className="mt-6 font-display italic text-mocha/55" style={{ fontSize: "0.95rem" }}>
+              Begin the page someone will find one day.
+            </p>
           </div>
         </Reveal>
       </div>
