@@ -772,9 +772,13 @@ function FromInstagram() {
             p.sizes?.medium?.mediaUrl ??
             (p.mediaType === "VIDEO" ? p.thumbnailUrl ?? p.mediaUrl : p.mediaUrl);
           const caption = (p.caption ?? "").split("\n")[0].slice(0, 140);
+          const href =
+            p.permalink && /^https?:\/\//.test(p.permalink)
+              ? p.permalink
+              : `https://www.instagram.com/p/${p.id}/`;
           return {
             key: p.id,
-            href: p.permalink,
+            href,
             img,
             alt: caption || "Instagram post from @noera_beforeitfades",
             caption,
@@ -789,6 +793,7 @@ function FromInstagram() {
           caption: "",
           date: "",
         }));
+
 
   return (
     <section className="bg-background py-24 md:py-40">
@@ -823,10 +828,16 @@ function FromInstagram() {
               <a
                 href={it.href}
                 target="_blank"
-                rel="noreferrer"
-                className="group block"
+                rel="noopener noreferrer"
+                referrerPolicy="no-referrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(it.href, "_blank", "noopener,noreferrer");
+                }}
+                className="group block cursor-pointer"
                 aria-label={it.alt}
               >
+
                 <div className="overflow-hidden bg-secondary">
                   <img
                     src={it.img}
