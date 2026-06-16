@@ -708,12 +708,88 @@ function InspirationArchive() {
   );
 }
 
+const BEHOLD_FEED_ID = "SAyLMD04qEOMgac0lE8p";
+
+type BeholdPost = {
+  id: string;
+  permalink: string;
+  mediaType: string;
+  mediaUrl: string;
+  thumbnailUrl?: string;
+  caption?: string;
+  timestamp?: string;
+  sizes?: {
+    medium?: { mediaUrl: string };
+    large?: { mediaUrl: string };
+    full?: { mediaUrl: string };
+  };
+};
+
+const fallbackReels = [
+  { src: reel1, alt: "Stack of vintage letters tied with twine beside dried lavender" },
+  { src: reel2, alt: "Hands writing in an open journal in warm window light" },
+  { src: reel3, alt: "Old family photograph against a ceramic vase with dried flowers" },
+];
+
+function formatDate(ts?: string) {
+  if (!ts) return "";
+  try {
+    return new Date(ts).toLocaleDateString("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+    });
+  } catch {
+    return "";
+  }
+}
+
 function FromInstagram() {
-  const reels = [
-    { src: reel1, alt: "Stack of vintage letters tied with twine beside dried lavender" },
-    { src: reel2, alt: "Hands writing in an open journal in warm window light" },
-    { src: reel3, alt: "Old family photograph against a ceramic vase with dried flowers" },
-  ];
+  const [posts, setPosts] = useState<BeholdPost[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`https://feeds.behold.so/${BEHOLD_FEED_ID}`)
+      .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+      .then((data) => {
+        if (cancelled) return;
+        const list: BeholdPost[] = Array.isArray(data) ? data : data.posts ?? [];
+        setPosts(list.slice(0, 3));
+      })
+      .catch(() => {
+        if (!cancelled) setPosts([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const items =
+    posts && posts.length > 0
+      ? posts.map((p) => {
+          const img =
+            p.sizes?.large?.mediaUrl ??
+            p.sizes?.medium?.mediaUrl ??
+            (p.mediaType === "VIDEO" ? p.thumbnailUrl ?? p.mediaUrl : p.mediaUrl);
+          const caption = (p.caption ?? "").split("\n")[0].slice(0, 140);
+          return {
+            key: p.id,
+            href: p.permalink,
+            img,
+            alt: caption || "Instagram post from @noera_beforeitfades",
+            caption,
+            date: formatDate(p.timestamp),
+          };
+        })
+      : fallbackReels.map((r, i) => ({
+          key: `fb-${i}`,
+          href: INSTAGRAM_URL,
+          img: r.src,
+          alt: r.alt,
+          caption: "",
+          date: "",
+        }));
+
   return (
     <section className="bg-background py-24 md:py-40">
       <div className="mx-auto max-w-[1400px] px-6 md:px-12">
@@ -726,36 +802,66 @@ function FromInstagram() {
             <h2 className="font-display text-4xl leading-[1.1] text-mocha md:text-6xl">
               The slow life, <span className="italic">in passing.</span>
             </h2>
-          </div>
-        </Reveal>
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-          {reels.map((r, i) => (
-            <Reveal key={r.alt} delay={i * 150}>
+            <p className="mt-6 font-serif text-base italic leading-relaxed text-mocha/60 md:text-lg">
+              A quiet, living archive — the latest from{" "}
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
-                className="group block overflow-hidden"
+                className="underline decoration-plum/40 underline-offset-4 hover:text-plum"
               >
-                <img
-                  src={r.src}
-                  alt={r.alt}
-                  width={800}
-                  height={1024}
-                  loading="lazy"
-                  className="aspect-[4/5] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
-                />
+                @noera_beforeitfades
+              </a>
+              .
+            </p>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-10 lg:gap-16">
+          {items.map((it, i) => (
+            <Reveal key={it.key} delay={i * 150}>
+              <a
+                href={it.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group block"
+                aria-label={it.alt}
+              >
+                <div className="overflow-hidden bg-secondary">
+                  <img
+                    src={it.img}
+                    alt={it.alt}
+                    width={800}
+                    height={1000}
+                    loading="lazy"
+                    className="aspect-[4/5] w-full object-cover transition-transform duration-[1400ms] ease-out group-hover:scale-[1.04]"
+                  />
+                </div>
+                <div className="mt-6 px-1">
+                  {it.date && (
+                    <p className="eyebrow text-mocha/50">{it.date}</p>
+                  )}
+                  {it.caption && (
+                    <p className="mt-3 font-serif text-sm italic leading-relaxed text-mocha/75 md:text-base">
+                      {it.caption}
+                    </p>
+                  )}
+                  <span className="mt-4 inline-block font-serif text-xs uppercase tracking-[0.3em] text-plum/70 transition-opacity group-hover:opacity-100 md:opacity-60">
+                    Read on Instagram →
+                  </span>
+                </div>
               </a>
             </Reveal>
           ))}
         </div>
+
         <Reveal delay={300}>
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-6 md:mt-20">
+          <div className="mt-20 flex flex-wrap items-center justify-center gap-6 md:mt-28">
             <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
               Shop the Journal
             </a>
             <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-ghost">
-              Follow Along →
+              Follow on Instagram →
             </a>
           </div>
         </Reveal>
