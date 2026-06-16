@@ -772,9 +772,13 @@ function FromInstagram() {
             p.sizes?.medium?.mediaUrl ??
             (p.mediaType === "VIDEO" ? p.thumbnailUrl ?? p.mediaUrl : p.mediaUrl);
           const caption = (p.caption ?? "").split("\n")[0].slice(0, 140);
+          const href =
+            p.permalink && /^https?:\/\//.test(p.permalink)
+              ? p.permalink
+              : `https://www.instagram.com/p/${p.id}/`;
           return {
             key: p.id,
-            href: p.permalink,
+            href,
             img,
             alt: caption || "Instagram post from @noera_beforeitfades",
             caption,
@@ -789,6 +793,7 @@ function FromInstagram() {
           caption: "",
           date: "",
         }));
+
 
   return (
     <section className="bg-background py-24 md:py-40">
