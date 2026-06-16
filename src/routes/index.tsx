@@ -828,10 +828,16 @@ function FromInstagram() {
               <a
                 href={it.href}
                 target="_blank"
-                rel="noreferrer"
-                className="group block"
+                rel="noopener noreferrer"
+                referrerPolicy="no-referrer"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.open(it.href, "_blank", "noopener,noreferrer");
+                }}
+                className="group block cursor-pointer"
                 aria-label={it.alt}
               >
+
                 <div className="overflow-hidden bg-secondary">
                   <img
                     src={it.img}
