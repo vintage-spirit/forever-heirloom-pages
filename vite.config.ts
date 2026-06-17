@@ -6,13 +6,24 @@
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
+// Build for GitHub Pages when GITHUB_PAGES=1 (set in the deploy workflow).
+// In that mode we disable nitro/SSR and emit a static SPA shell so GitHub
+// Pages can serve plain index.html + client assets under the repo subpath.
+const isGithubPages = process.env.GITHUB_PAGES === "1";
+
 export default defineConfig({
   vite: {
     base: "/forever-heirloom-pages/",
   },
-  tanstackStart: {
-    // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
-    // nitro/vite builds from this
-    server: { entry: "server" },
-  },
+  nitro: isGithubPages ? false : undefined,
+  tanstackStart: isGithubPages
+    ? {
+        spa: { enabled: true },
+        server: { entry: "server" },
+      }
+    : {
+        // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
+        // nitro/vite builds from this
+        server: { entry: "server" },
+      },
 });
