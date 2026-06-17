@@ -13,7 +13,7 @@ const isGithubPages = process.env.GITHUB_PAGES === "1";
 
 export default defineConfig({
   vite: {
-    base: "/forever-heirloom-pages/",
+    base: "/",
   },
   nitro: isGithubPages ? false : undefined,
   tanstackStart: isGithubPages
