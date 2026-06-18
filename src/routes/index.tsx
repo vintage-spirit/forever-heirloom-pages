@@ -237,7 +237,7 @@ function Hero() {
             quietly bound, slowly written, made to outlast the scroll.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-primary bg-cream! text-mocha! border-cream!">
               Shop the Journal
             </a>
             <a href="#story" className="text-[0.72rem] uppercase tracking-[0.32em] text-cream/85 underline-offset-8 hover:underline">
@@ -264,7 +264,7 @@ function EmotionalStatement() {
             <span className="italic text-plum"> more than a camera roll.</span>
           </p>
           <div className="mt-12">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">
               Shop the Journal
             </a>
           </div>
@@ -315,7 +315,7 @@ function TheJournal() {
               </p>
             </div>
             <div className="mt-10">
-              <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+              <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">Shop the Journal</a>
             </div>
           </div>
         </Reveal>
@@ -661,7 +661,7 @@ function GlimpseInside() {
 
         <Reveal delay={300}>
           <div className="mt-20 text-center md:mt-28">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">
               Shop the Journal
             </a>
             <p className="mt-6 font-display italic text-mocha/55" style={{ fontSize: "0.95rem" }}>
@@ -704,7 +704,7 @@ function Storytelling() {
             the feed, but stay with you for years.
           </p>
           <div className="mt-12">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">Shop the Journal</a>
           </div>
         </div>
       </Reveal>
@@ -741,7 +741,7 @@ function InspirationArchive() {
                 Quiet notes <span className="italic">from the journal.</span>
               </h2>
             </div>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-ghost">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)" className="btn-ghost">
               Read on Instagram →
             </a>
           </div>
@@ -752,7 +752,7 @@ function InspirationArchive() {
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)"
                 className="group block"
               >
                 <div className="overflow-hidden">
@@ -780,7 +780,7 @@ function InspirationArchive() {
         </div>
         <Reveal delay={300}>
           <div className="mt-16 text-center md:mt-20">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">Shop the Journal</a>
           </div>
         </Reveal>
       </div>
@@ -892,7 +892,7 @@ function FromInstagram() {
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)"
                 className="underline decoration-plum/40 underline-offset-4 hover:text-plum"
               >
                 @noera_beforeitfades
@@ -948,10 +948,10 @@ function FromInstagram() {
 
         <Reveal delay={300}>
           <div className="mt-20 flex flex-wrap items-center justify-center gap-6 md:mt-28">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">
               Shop the Journal
             </a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-ghost">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)" className="btn-ghost">
               Follow on Instagram →
             </a>
           </div>
@@ -1086,7 +1086,7 @@ function FinalCTA() {
             <span className="block italic text-peach">will tell your story.</span>
           </h2>
           <div className="mt-14">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-primary bg-cream! text-mocha! border-cream!">
               Shop the Journal
             </a>
           </div>
@@ -1103,7 +1103,7 @@ function Footer() {
         <Logo />
         <p className="font-display text-xl italic text-plum">before it fades</p>
         <div className="flex items-center gap-10 text-[0.7rem] uppercase tracking-[0.3em] text-mocha/70">
-          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="hover:text-plum">Instagram</a>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)" className="hover:text-plum">Instagram</a>
           <a href="#contact" className="hover:text-plum">Contact</a>
         </div>
         <p className="pt-6 text-[0.65rem] uppercase tracking-[0.32em] text-mocha/50">
