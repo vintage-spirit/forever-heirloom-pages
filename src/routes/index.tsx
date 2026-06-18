@@ -1134,7 +1134,7 @@ function FloatingCTA() {
       href={STRIPE_URL}
       target="_blank"
       rel="noreferrer"
-      aria-label="Shop the Journal"
+      aria-label="Shop the NOERA Journal (opens Stripe in a new tab)"
       className="btn-plum fixed bottom-6 right-6 z-50 shadow-[0_18px_40px_-18px_rgba(71,45,48,0.55)] md:bottom-10 md:right-10"
       style={{
         opacity: visible ? 1 : 0,
