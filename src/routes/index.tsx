@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
 import heroImg from "@/assets/hero.jpg";
 import journalImg from "@/assets/journal.jpg";
@@ -31,6 +31,26 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "NOERA Heirloom Memory Journal",
+          description:
+            "A linen-bound heirloom journal for photographs, reflections and the moments that deserve to stay.",
+          brand: { "@type": "Brand", name: "NOERA" },
+          category: "Journals & Notebooks",
+          offers: {
+            "@type": "Offer",
+            url: "https://buy.stripe.com/5kQeV68Q3eD9eTL7zK7kc00",
+            availability: "https://schema.org/InStock",
+            priceCurrency: "EUR",
+          },
+        }),
+      },
+    ],
   }),
   component: Index,
 });
@@ -112,11 +132,21 @@ function Index() {
 }
 
 function Nav() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-7 md:px-12 md:py-9">
         <Logo className="text-cream md:text-cream" />
-        <nav className="hidden items-center gap-10 text-[0.7rem] uppercase tracking-[0.3em] text-cream md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-10 text-[0.7rem] uppercase tracking-[0.3em] text-cream md:flex">
           <a href="#journal" className="transition-opacity hover:opacity-70">The Journal</a>
           <a href="#inside" className="transition-opacity hover:opacity-70">Inside</a>
           <a href="#archive" className="transition-opacity hover:opacity-70">Inspiration</a>
@@ -126,7 +156,57 @@ function Nav() {
           href={STRIPE_URL}
           target="_blank"
           rel="noreferrer"
+          aria-label="Shop the NOERA Journal (opens Stripe in a new tab)"
           className="hidden border border-cream/60 px-5 py-3 text-[0.65rem] uppercase tracking-[0.3em] text-cream transition hover:bg-cream hover:text-mocha md:inline-block"
+        >
+          Shop the Journal
+        </a>
+
+        <button
+          type="button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((v) => !v)}
+          className="relative z-50 inline-flex h-11 w-11 items-center justify-center text-cream md:hidden"
+        >
+          <span aria-hidden className="relative block h-3 w-6">
+            <span
+              className="absolute left-0 right-0 h-px bg-current transition-transform duration-300"
+              style={{ top: open ? "6px" : 0, transform: open ? "rotate(45deg)" : "none" }}
+            />
+            <span
+              className="absolute left-0 right-0 h-px bg-current transition-transform duration-300"
+              style={{ top: open ? "6px" : "12px", transform: open ? "rotate(-45deg)" : "none" }}
+            />
+          </span>
+        </button>
+      </div>
+
+      <div
+        id="mobile-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-mocha text-cream transition-opacity duration-300 md:hidden"
+        style={{
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? "auto" : "none",
+        }}
+      >
+        <nav aria-label="Mobile" className="flex flex-col items-center gap-8 text-sm uppercase tracking-[0.3em]">
+          <a href="#journal" onClick={() => setOpen(false)} className="hover:text-peach">The Journal</a>
+          <a href="#inside" onClick={() => setOpen(false)} className="hover:text-peach">Inside</a>
+          <a href="#archive" onClick={() => setOpen(false)} className="hover:text-peach">Inspiration</a>
+          <a href="#contact" onClick={() => setOpen(false)} className="hover:text-peach">Contact</a>
+        </nav>
+        <a
+          href={STRIPE_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Shop the NOERA Journal (opens Stripe in a new tab)"
+          onClick={() => setOpen(false)}
+          className="border border-cream/60 px-6 py-3 text-[0.7rem] uppercase tracking-[0.3em] text-cream transition hover:bg-cream hover:text-mocha"
         >
           Shop the Journal
         </a>
@@ -157,7 +237,7 @@ function Hero() {
             quietly bound, slowly written, made to outlast the scroll.
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-8">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-primary bg-cream! text-mocha! border-cream!">
               Shop the Journal
             </a>
             <a href="#story" className="text-[0.72rem] uppercase tracking-[0.32em] text-cream/85 underline-offset-8 hover:underline">
@@ -184,7 +264,7 @@ function EmotionalStatement() {
             <span className="italic text-plum"> more than a camera roll.</span>
           </p>
           <div className="mt-12">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">
               Shop the Journal
             </a>
           </div>
@@ -235,7 +315,7 @@ function TheJournal() {
               </p>
             </div>
             <div className="mt-10">
-              <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+              <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">Shop the Journal</a>
             </div>
           </div>
         </Reveal>
@@ -581,7 +661,7 @@ function GlimpseInside() {
 
         <Reveal delay={300}>
           <div className="mt-20 text-center md:mt-28">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">
               Shop the Journal
             </a>
             <p className="mt-6 font-display italic text-mocha/55" style={{ fontSize: "0.95rem" }}>
@@ -624,7 +704,7 @@ function Storytelling() {
             the feed, but stay with you for years.
           </p>
           <div className="mt-12">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">Shop the Journal</a>
           </div>
         </div>
       </Reveal>
@@ -636,12 +716,14 @@ function InspirationArchive() {
   const cards = [
     {
       img: archive1,
+      imgAlt: "An open NOERA journal page with a printed black-and-white photograph and handwritten notes in soft daylight.",
       eyebrow: "Reflection no. 04",
       title: "On the things we almost lost.",
       body: "A short reflection on attention, slowness, and the photographs we never printed.",
     },
     {
       img: archive2,
+      imgAlt: "A close-up of a pen resting on a linen-bound journal beside a pressed flower and a folded letter.",
       eyebrow: "Prompt no. 11",
       title: "Write the afternoon you almost forgot.",
       body: "A gentle prompt for your next journal page — a memory worth returning to.",
@@ -661,7 +743,7 @@ function InspirationArchive() {
                 Quiet notes <span className="italic">from the journal.</span>
               </h2>
             </div>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-ghost">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)" className="btn-ghost">
               Read on Instagram →
             </a>
           </div>
@@ -673,12 +755,13 @@ function InspirationArchive() {
                 href={INSTAGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
+                aria-label={`Read “${c.title}” on Instagram (opens in a new tab)`}
                 className="group block"
               >
                 <div className="overflow-hidden">
                   <img
                     src={c.img}
-                    alt={c.title}
+                    alt={c.imgAlt}
                     width={1200}
                     height={900}
                     loading="lazy"
@@ -700,7 +783,7 @@ function InspirationArchive() {
         </div>
         <Reveal delay={300}>
           <div className="mt-16 text-center md:mt-20">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">Shop the Journal</a>
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">Shop the Journal</a>
           </div>
         </Reveal>
       </div>
@@ -812,7 +895,7 @@ function FromInstagram() {
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)"
                 className="underline decoration-plum/40 underline-offset-4 hover:text-plum"
               >
                 @noera_beforeitfades
@@ -835,7 +918,7 @@ function FromInstagram() {
                   window.open(it.href, "_blank", "noopener,noreferrer");
                 }}
                 className="group block cursor-pointer"
-                aria-label={it.alt}
+                aria-label={`${it.alt} — view on Instagram (opens in a new tab)`}
               >
 
                 <div className="overflow-hidden bg-secondary">
@@ -868,10 +951,10 @@ function FromInstagram() {
 
         <Reveal delay={300}>
           <div className="mt-20 flex flex-wrap items-center justify-center gap-6 md:mt-28">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-plum">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-plum">
               Shop the Journal
             </a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="btn-ghost">
+            <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)" className="btn-ghost">
               Follow on Instagram →
             </a>
           </div>
@@ -969,17 +1052,18 @@ function Field({
   required?: boolean;
   maxLength?: number;
 }) {
+  const fieldId = useId();
   const common =
     "w-full bg-transparent border-0 border-b border-mocha/30 py-3 font-serif text-lg text-mocha placeholder:text-mocha/40 focus:border-plum focus:outline-none transition-colors";
   return (
-    <label className="block">
-      <span className="eyebrow mb-3 block text-mocha/70">{label}</span>
+    <div className="block">
+      <label htmlFor={fieldId} className="eyebrow mb-3 block text-mocha/70">{label}</label>
       {textarea ? (
-        <textarea name={name} required={required} maxLength={maxLength} rows={4} className={common} />
+        <textarea id={fieldId} name={name} required={required} maxLength={maxLength} rows={4} className={common} />
       ) : (
-        <input name={name} type={type} required={required} maxLength={maxLength} className={common} />
+        <input id={fieldId} name={name} type={type} required={required} maxLength={maxLength} className={common} />
       )}
-    </label>
+    </div>
   );
 }
 
@@ -1006,7 +1090,7 @@ function FinalCTA() {
             <span className="block italic text-peach">will tell your story.</span>
           </h2>
           <div className="mt-14">
-            <a href={STRIPE_URL} target="_blank" rel="noreferrer" className="btn-primary bg-cream! text-mocha! border-cream!">
+            <a href={STRIPE_URL} target="_blank" rel="noreferrer" aria-label="Shop the NOERA Journal (opens Stripe in a new tab)" className="btn-primary bg-cream! text-mocha! border-cream!">
               Shop the Journal
             </a>
           </div>
@@ -1023,7 +1107,7 @@ function Footer() {
         <Logo />
         <p className="font-display text-xl italic text-plum">before it fades</p>
         <div className="flex items-center gap-10 text-[0.7rem] uppercase tracking-[0.3em] text-mocha/70">
-          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" className="hover:text-plum">Instagram</a>
+          <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)" className="hover:text-plum">Instagram</a>
           <a href="#contact" className="hover:text-plum">Contact</a>
         </div>
         <p className="pt-6 text-[0.65rem] uppercase tracking-[0.32em] text-mocha/50">
@@ -1050,7 +1134,7 @@ function FloatingCTA() {
       href={STRIPE_URL}
       target="_blank"
       rel="noreferrer"
-      aria-label="Shop the Journal"
+      aria-label="Shop the NOERA Journal (opens Stripe in a new tab)"
       className="btn-plum fixed bottom-6 right-6 z-50 shadow-[0_18px_40px_-18px_rgba(71,45,48,0.55)] md:bottom-10 md:right-10"
       style={{
         opacity: visible ? 1 : 0,
