@@ -31,6 +31,26 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "/" },
     ],
     links: [{ rel: "canonical", href: "/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: "NOERA Heirloom Memory Journal",
+          description:
+            "A linen-bound heirloom journal for photographs, reflections and the moments that deserve to stay.",
+          brand: { "@type": "Brand", name: "NOERA" },
+          category: "Journals & Notebooks",
+          offers: {
+            "@type": "Offer",
+            url: "https://buy.stripe.com/5kQeV68Q3eD9eTL7zK7kc00",
+            availability: "https://schema.org/InStock",
+            priceCurrency: "EUR",
+          },
+        }),
+      },
+    ],
   }),
   component: Index,
 });
