@@ -132,11 +132,21 @@ function Index() {
 }
 
 function Nav() {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [open]);
+
   return (
     <header className="absolute top-0 left-0 right-0 z-30">
       <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-7 md:px-12 md:py-9">
         <Logo className="text-cream md:text-cream" />
-        <nav className="hidden items-center gap-10 text-[0.7rem] uppercase tracking-[0.3em] text-cream md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-10 text-[0.7rem] uppercase tracking-[0.3em] text-cream md:flex">
           <a href="#journal" className="transition-opacity hover:opacity-70">The Journal</a>
           <a href="#inside" className="transition-opacity hover:opacity-70">Inside</a>
           <a href="#archive" className="transition-opacity hover:opacity-70">Inspiration</a>
@@ -146,7 +156,57 @@ function Nav() {
           href={STRIPE_URL}
           target="_blank"
           rel="noreferrer"
+          aria-label="Shop the NOERA Journal (opens Stripe in a new tab)"
           className="hidden border border-cream/60 px-5 py-3 text-[0.65rem] uppercase tracking-[0.3em] text-cream transition hover:bg-cream hover:text-mocha md:inline-block"
+        >
+          Shop the Journal
+        </a>
+
+        <button
+          type="button"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+          onClick={() => setOpen((v) => !v)}
+          className="relative z-50 inline-flex h-11 w-11 items-center justify-center text-cream md:hidden"
+        >
+          <span aria-hidden className="relative block h-3 w-6">
+            <span
+              className="absolute left-0 right-0 h-px bg-current transition-transform duration-300"
+              style={{ top: open ? "6px" : 0, transform: open ? "rotate(45deg)" : "none" }}
+            />
+            <span
+              className="absolute left-0 right-0 h-px bg-current transition-transform duration-300"
+              style={{ top: open ? "6px" : "12px", transform: open ? "rotate(-45deg)" : "none" }}
+            />
+          </span>
+        </button>
+      </div>
+
+      <div
+        id="mobile-nav"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation"
+        className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-10 bg-mocha text-cream transition-opacity duration-300 md:hidden"
+        style={{
+          opacity: open ? 1 : 0,
+          pointerEvents: open ? "auto" : "none",
+        }}
+      >
+        <nav aria-label="Mobile" className="flex flex-col items-center gap-8 text-sm uppercase tracking-[0.3em]">
+          <a href="#journal" onClick={() => setOpen(false)} className="hover:text-peach">The Journal</a>
+          <a href="#inside" onClick={() => setOpen(false)} className="hover:text-peach">Inside</a>
+          <a href="#archive" onClick={() => setOpen(false)} className="hover:text-peach">Inspiration</a>
+          <a href="#contact" onClick={() => setOpen(false)} className="hover:text-peach">Contact</a>
+        </nav>
+        <a
+          href={STRIPE_URL}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Shop the NOERA Journal (opens Stripe in a new tab)"
+          onClick={() => setOpen(false)}
+          className="border border-cream/60 px-6 py-3 text-[0.7rem] uppercase tracking-[0.3em] text-cream transition hover:bg-cream hover:text-mocha"
         >
           Shop the Journal
         </a>
