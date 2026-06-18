@@ -918,7 +918,7 @@ function FromInstagram() {
                   window.open(it.href, "_blank", "noopener,noreferrer");
                 }}
                 className="group block cursor-pointer"
-                aria-label={it.alt}
+                aria-label={`${it.alt} — view on Instagram (opens in a new tab)`}
               >
 
                 <div className="overflow-hidden bg-secondary">
