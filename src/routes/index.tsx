@@ -716,12 +716,14 @@ function InspirationArchive() {
   const cards = [
     {
       img: archive1,
+      imgAlt: "An open NOERA journal page with a printed black-and-white photograph and handwritten notes in soft daylight.",
       eyebrow: "Reflection no. 04",
       title: "On the things we almost lost.",
       body: "A short reflection on attention, slowness, and the photographs we never printed.",
     },
     {
       img: archive2,
+      imgAlt: "A close-up of a pen resting on a linen-bound journal beside a pressed flower and a folded letter.",
       eyebrow: "Prompt no. 11",
       title: "Write the afternoon you almost forgot.",
       body: "A gentle prompt for your next journal page — a memory worth returning to.",
