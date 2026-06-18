@@ -754,13 +754,14 @@ function InspirationArchive() {
               <a
                 href={INSTAGRAM_URL}
                 target="_blank"
-                rel="noreferrer" aria-label="Follow @noera_beforeitfades on Instagram (opens in a new tab)"
+                rel="noreferrer"
+                aria-label={`Read “${c.title}” on Instagram (opens in a new tab)`}
                 className="group block"
               >
                 <div className="overflow-hidden">
                   <img
                     src={c.img}
-                    alt={c.title}
+                    alt={c.imgAlt}
                     width={1200}
                     height={900}
                     loading="lazy"
