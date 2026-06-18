@@ -1052,17 +1052,18 @@ function Field({
   required?: boolean;
   maxLength?: number;
 }) {
+  const fieldId = useId();
   const common =
     "w-full bg-transparent border-0 border-b border-mocha/30 py-3 font-serif text-lg text-mocha placeholder:text-mocha/40 focus:border-plum focus:outline-none transition-colors";
   return (
-    <label className="block">
-      <span className="eyebrow mb-3 block text-mocha/70">{label}</span>
+    <div className="block">
+      <label htmlFor={fieldId} className="eyebrow mb-3 block text-mocha/70">{label}</label>
       {textarea ? (
-        <textarea name={name} required={required} maxLength={maxLength} rows={4} className={common} />
+        <textarea id={fieldId} name={name} required={required} maxLength={maxLength} rows={4} className={common} />
       ) : (
-        <input name={name} type={type} required={required} maxLength={maxLength} className={common} />
+        <input id={fieldId} name={name} type={type} required={required} maxLength={maxLength} className={common} />
       )}
-    </label>
+    </div>
   );
 }
 
