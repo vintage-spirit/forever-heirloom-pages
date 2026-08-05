@@ -8,7 +8,7 @@
 export const GATE_ENABLED = true;
 
 /** Password visitors must type to enter the public site. */
-export const SITE_PASSWORD = "beforeitfades";
+export const SITE_PASSWORD = "19frida90";
 
 export const GATE_STORAGE_KEY = "noera_gate_unlocked";
 
